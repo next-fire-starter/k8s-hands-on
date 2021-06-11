@@ -103,7 +103,7 @@ kubectl get replicaset
 kubectl delete deployment myapp-deployment
 ```
 ---
-### サービス  
+### サービス  NodePort(外部に公開)
 デプロイメント起動  
 サービスを起動    
 サービス確認   
@@ -122,8 +122,25 @@ kubectl delete service myapp-service
 kubectl delete deployment myapp-deployment
 ```
 
+---
+### サービス  ClusterIP(内部だけ公開)
+デプロイメント起動  
+サービスを起動    
+サービス確認   
+お片付け
+```
+kubectl apply -f deployment-definition.yml
+kubectl apply -f service-definition-custerip.yml
+kubectl get service
 
-
+##上記の情報よりClusterIPを特定
+curl http://10.101.34.102
+kubectl delete service front-end
+kubectl delete deployment myapp-deployment
+```
+---
+### サービス  Load Balancer(複数のクラスター)
+クラウドサービス向け
 
 
 
