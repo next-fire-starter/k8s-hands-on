@@ -68,7 +68,7 @@ kubectl delete replicaset myapp-replicaset
 ### デプロイメント
 デプロイメント起動  
 デプロイメント確認  
-情報確認 ポッド、レプリカセット、デプロイメント、サービス
+情報確認 ポッド、レプリカセット、デプロイメント、サービス  
 お片付け  
 ```
 kubectl apply -f deployment-definition.yml
@@ -94,12 +94,33 @@ kubectl set image deployment/myapp-deployment nginx-container=nginx:1.9.1 --reco
 kubectl rollout history deployment myapp-deployment
 kubectl describe deployment myapp-deployment
 ```
-ロールアウトアンドゥで更新前へロールバックする
-お片付け
+ロールアウトアンドゥで更新前へロールバックする  
+お片付け  
 ```
 kubectl get replicaset
 kubectl rollout undo deployment myapp-deployment
 kubectl get replicaset
 kubectl delete deployment myapp-deployment
 ```
+---
+### サービス  
+デプロイメント起動  
+サービスを起動    
+サービス確認   
+お片付け
+```
+kubectl apply -f deployment-definition.yml
+kubectl apply -f service-definition.yml
+kubectl get service
+minikube service myapp-service --url
+http://192.168.11.31:30004
+
+kubectl delete service myapp-service
+kubectl delete deployment myapp-deployment
+```
+
+
+
+
+
 
