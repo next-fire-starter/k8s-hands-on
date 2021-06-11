@@ -56,6 +56,7 @@ kubectl edit replicaset myapp-replicaset
 ```
 
 同じ名前のPODを１つ増やしてもreplicasetで指定した数より多く起動しない  
+お片付け
 ```
 kubectl apply -f replicaset-definition.yml
 kubectl get pod
@@ -65,9 +66,10 @@ kubectl delete replicaset myapp-replicaset
 ```
 ---
 ### デプロイメント
-デプロイメント起動
-デプロイメント確認
-情報確認 ポッド、レプリカセット、デプロイメント、ノード
+デプロイメント起動  
+デプロイメント確認  
+情報確認 ポッド、レプリカセット、デプロイメント、サービス
+お片付け  
 ```
 kubectl apply -f deployment-definition.yml
 kubectl get deployment
@@ -78,22 +80,26 @@ kubectl delete deployment myapp-deployment
 ---
 ### ロールアウト
 
-ロールアウト確認
+ロールアウト確認  recodeオプションを付けて履歴に変更内容を追記するように設定  
 ```
-kubectl apply -f deployment-definition.yml
+kubectl apply -f deployment-definition.yml --record
 kubectl rollout status deployment myapp-deployment
 ```
-イメージを変更して履歴が作成されることを確認
-詳細のイベントでローリングアップデートが実行されている履歴が確認できる
-レプリカセットが新しく作成されていることを確認
+イメージを変更して履歴が作成されることを確認  
+詳細のイベントでローリングアップデートが実行されている履歴が確認できるrecodeオプションの内容も記載されている  
+レプリカセットが新しく作成されていることを確認  
 ```
-kubectl apply -f deployment-definition.yml
 kubectl rollout history deployment myapp-deployment
-kubectl set image deployment/myapp-deployment nginx-container=nginx:1.9.1
+kubectl set image deployment/myapp-deployment nginx-container=nginx:1.9.1 --record
 kubectl rollout history deployment myapp-deployment
 kubectl describe deployment myapp-deployment
+```
+ロールアウトアンドゥで更新前へロールバックする
+お片付け
+```
 kubectl get replicaset
 kubectl rollout undo deployment myapp-deployment
 kubectl get replicaset
+kubectl delete deployment myapp-deployment
 ```
 
