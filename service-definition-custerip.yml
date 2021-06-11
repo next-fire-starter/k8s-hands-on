@@ -11,4 +11,4 @@ spec:
       nodePort: 30004
   selector:
     app: myapp
-    type: back-end
+    type: front-end
