@@ -109,6 +109,9 @@ kubectl delete deployment myapp-deployment
 サービス確認   
 お片付け
 ```
+firewall-cmd --add-port=30004/tcp --zone=public --permanent
+firewall-cmd --reload
+
 kubectl apply -f deployment-definition.yml
 kubectl apply -f service-definition.yml
 kubectl get service
