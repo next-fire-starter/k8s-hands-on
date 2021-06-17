@@ -1,6 +1,13 @@
 ## 実行手順
 
 ---
+雛形YMLファイル作成方法
+```
+kubectl create pod--image-nginx --dry-run=client -o yaml > nginx-pod.yml
+
+```
+
+---
 ### ポッド
 ポッド起動  
 ポッド確認  
